@@ -9,6 +9,7 @@
 (define-public (initialize-contract (owner-principal principal) (default-tip-percent uint))
     (begin
         (asserts! (< default-tip-percent u100) (err "Tip percentage cannot exceed 100%"))
+        (asserts! (not (is-eq owner-principal tx-sender)) (err "Invalid owner principal"))
         (var-set owner owner-principal)
         (var-set tip-percent default-tip-percent)
         (ok true)
